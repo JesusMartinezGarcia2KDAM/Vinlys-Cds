@@ -9,11 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+
 //import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Table(name="ROL")
-public class Rol implements /*GrantedAuthority,*/ Serializable {
+public class Rol implements GrantedAuthority, Serializable {
 	
 	@Id
 	@Column
