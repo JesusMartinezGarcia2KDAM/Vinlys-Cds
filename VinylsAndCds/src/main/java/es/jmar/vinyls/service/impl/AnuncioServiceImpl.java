@@ -6,6 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import es.jmar.vinyls.converter.Convertidor;
@@ -77,6 +78,11 @@ public class AnuncioServiceImpl implements AnuncioService {
 	public List<MAnuncio> obtener() {
 		logger.info("OBTENIENDO TODOS LOS ELEMENTOS");
 		return converter.convertirListaAnuncio(repo.findAll());
+	}
+
+	@Override
+	public List<MAnuncio> obtenerPorPaginacion(Pageable pageable) {
+		return converter.convertirListaAnuncio(repo.findAll(pageable).getContent());
 	}
 
 }
