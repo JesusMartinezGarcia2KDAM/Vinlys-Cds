@@ -3,17 +3,18 @@ package es.jmar.vinyls.service;
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 
 import es.jmar.vinyls.entity.Anuncio;
 import es.jmar.vinyls.model.MAnuncio;
 
 public interface AnuncioService {
 	
-	boolean insertar(Anuncio anuncio);
+	ResponseEntity<String> insertar(Anuncio anuncio);
 	
-	boolean actualizar(Anuncio anuncio);
+	ResponseEntity<String> actualizar(Anuncio anuncio);
 	
-	boolean borrar(String titulo, int id);
+	ResponseEntity<String> borrar(String titulo, int id);
 	
 	List<MAnuncio> obtener();
 	

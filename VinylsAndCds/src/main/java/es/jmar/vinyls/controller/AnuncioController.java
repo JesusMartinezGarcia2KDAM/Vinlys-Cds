@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,17 +25,17 @@ public class AnuncioController {
 	AnuncioServiceImpl service;
 	
 	@PutMapping("/anuncio")
-	public boolean agregarAnuncio(@RequestBody @Valid Anuncio anuncio) {
+	public ResponseEntity<String> agregarAnuncio(@RequestBody @Valid Anuncio anuncio) {
 		return service.insertar(anuncio);
 		}
 	
 	@PostMapping("/anuncio")
-	public boolean actualizar(@RequestBody @Valid Anuncio anuncio) {
+	public ResponseEntity<String> actualizar(@RequestBody @Valid Anuncio anuncio) {
 		return service.actualizar(anuncio);
 	}
 	
 	@DeleteMapping("/anuncio/{id}/{titulo}")
-	public boolean borrarAnuncio(@PathVariable("id") int id, @PathVariable("titulo") String titulo) {
+	public ResponseEntity<String> borrarAnuncio(@PathVariable("id") int id, @PathVariable("titulo") String titulo) {
 		return service.borrar(titulo, id);
 	}
 	

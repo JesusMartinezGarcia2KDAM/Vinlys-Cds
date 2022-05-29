@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import es.jmar.vinyls.entity.Anuncio;
+import es.jmar.vinyls.entity.Usuario;
 import es.jmar.vinyls.model.MAnuncio;
+import es.jmar.vinyls.model.MUsuario;
 
 @Component("convertidor")
 public class Convertidor {
@@ -16,6 +18,15 @@ public class Convertidor {
 		
 		for(Anuncio a: anuncios) {
 			list.add(new MAnuncio(a));
+		}
+		return list;
+	}
+	
+	public List<MUsuario> convertirListaUsuario(List<Usuario> usuarios){
+		List<MUsuario> list = new ArrayList<>();
+		
+		for(Usuario u: usuarios) {
+			list.add(new MUsuario(u));
 		}
 		return list;
 	}

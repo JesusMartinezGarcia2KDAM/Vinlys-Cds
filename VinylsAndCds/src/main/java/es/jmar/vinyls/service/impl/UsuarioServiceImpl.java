@@ -11,45 +11,31 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import es.jmar.vinyls.converter.Convertidor;
-import es.jmar.vinyls.entity.Anuncio;
-import es.jmar.vinyls.model.MAnuncio;
-import es.jmar.vinyls.repository.AnuncioRepo;
-import es.jmar.vinyls.service.AnuncioService;
+import es.jmar.vinyls.entity.Usuario;
+import es.jmar.vinyls.model.MUsuario;
+import es.jmar.vinyls.repository.UsuarioRepo;
+import es.jmar.vinyls.service.UsuarioService;
 
 @Service
-public class AnuncioServiceImpl implements AnuncioService {
+public class UsuarioServiceImpl implements UsuarioService {
+
 	
 	@Autowired
-	AnuncioRepo repo;
+	UsuarioRepo repo;
 	
 	@Autowired
 	@Qualifier("convertidor")
 	Convertidor converter;
-
-	
 	
 	private static final Log logger = LogFactory.getLog(AnuncioServiceImpl.class);
+
 	
 	@Override
-	public ResponseEntity<String> insertar(Anuncio anuncio) {
-		logger.info("CREANDO ANUNCIO");
+	public ResponseEntity<String> insertar(Usuario usuario) {
+		logger.info("CREANDO USUARIO");
 		try {
-			repo.save(anuncio);
-			logger.info("CREANDO ANUNCIO");
-			return ResponseEntity.ok("OK");
-		} catch(Exception e) {
-			logger.error("HUBO UN ERROR");
-			throw(e);
-		}
-		
-	}
-
-	@Override
-	public ResponseEntity<String> actualizar(Anuncio anuncio) {
-		logger.info("ACTUALIZANDO ANUNCIO");
-		try {
-			repo.save(anuncio);
-			logger.info("ACTUALIZANDO ANUNCIO");
+			repo.save(usuario);
+			logger.info("CREANDO USUARIO");
 			return ResponseEntity.ok("OK");
 		} catch(Exception e) {
 			logger.error("HUBO UN ERROR");
@@ -58,14 +44,27 @@ public class AnuncioServiceImpl implements AnuncioService {
 	}
 
 	@Override
-	public ResponseEntity<String> borrar(String titulo, int id) {
+	public ResponseEntity<String> actualizar(Usuario usuario) {
+		logger.info("ACTUALIZANDO USUARIO");
+		try {
+			repo.save(usuario);
+			logger.info("ACTUALIZANDO USUARIO");
+			return ResponseEntity.ok("OK");
+		} catch(Exception e) {
+			logger.error("HUBO UN ERROR");
+			throw(e);
+		}
+	}
+
+	@Override
+	public ResponseEntity<String> borrar(String username) {
 		logger.warn("BORRANDO ANUNCIO");
 		try {
 			logger.info("BORRANDO ANUNCIO");
 			//Empleado e = empleadoDAO.findById(id);
-			Anuncio a = repo.findByTituloAndId(titulo, id);
-			logger.info(a.getId());
-			repo.delete(a);
+			Usuario u = repo.findByUsername(username);
+			logger.info(u.getUsername());
+			repo.delete(u);
 			
 			return ResponseEntity.ok("OK");
 		} catch (Exception e) {
@@ -76,14 +75,14 @@ public class AnuncioServiceImpl implements AnuncioService {
 	}
 
 	@Override
-	public List<MAnuncio> obtener() {
+	public List<MUsuario> obtener() {
 		logger.info("OBTENIENDO TODOS LOS ELEMENTOS");
-		return converter.convertirListaAnuncio(repo.findAll());
+		return converter.convertirListaUsuario(repo.findAll());
 	}
 
 	@Override
-	public List<MAnuncio> obtenerPorPaginacion(Pageable pageable) {
-		return converter.convertirListaAnuncio(repo.findAll(pageable).getContent());
+	public List<MUsuario> obtenerPorPaginacion(Pageable pageable) {
+		return converter.convertirListaUsuario(repo.findAll(pageable).getContent());
 	}
 
 }

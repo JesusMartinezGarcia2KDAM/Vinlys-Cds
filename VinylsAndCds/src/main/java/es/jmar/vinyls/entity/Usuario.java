@@ -1,8 +1,6 @@
 package es.jmar.vinyls.entity;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,15 +10,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name="USUARIO")
-public class Usuario implements UserDetails, Serializable {
+public class Usuario implements /*UserDetails,*/ Serializable {
 	
 	@Id
 	@Column(name="username")
@@ -85,9 +80,19 @@ public class Usuario implements UserDetails, Serializable {
 	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
+	
+	
 
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Arrays.asList( rol );
+//	public Collection<? extends GrantedAuthority> getAuthorities() {
+//		return Arrays.asList( rol );
+//	}
+
+	public List<Anuncio> getAnuncios() {
+		return anuncios;
+	}
+
+	public void setAnuncios(List<Anuncio> anuncios) {
+		this.anuncios = anuncios;
 	}
 
 	public boolean isAccountNonExpired() {
